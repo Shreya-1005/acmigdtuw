@@ -53,6 +53,7 @@ export default function Navbar() {
         }
         .nb-link:hover::after { transform: scaleX(1); }
 
+
         .nb-join {
           padding: 8px 20px;
           border-radius: 9px;
@@ -116,7 +117,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links */}
-        <div className="nb-links" style={{ display: 'flex', gap: '2px', margin: '0 auto' }}>
+        <div className="nb-links" style={{ display: 'flex', gap: '2px', margin: '0 auto', alignItems: 'center' }}>
           {NAV_LINKS.map(({ label, href }) => (
             <a key={label} href={href} className="nb-link">{label}</a>
           ))}

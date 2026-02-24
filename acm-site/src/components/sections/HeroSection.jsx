@@ -5,6 +5,9 @@ import { setPlaying } from '../../lib/store'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Update this after deploying the POTD app to Vercel
+const POTD_URL = 'https://potd.acmigdtuw.com'
+
 const stats = [
   { value: '200+', label: 'Members'  },
   { value: '50+',  label: 'Events'   },
@@ -119,7 +122,9 @@ export default function HeroSection() {
         {/* CTA Buttons */}
         <div ref={btnsRef} style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
           <a
-            href="#join"
+            href={POTD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
