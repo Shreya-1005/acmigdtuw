@@ -254,8 +254,8 @@ export default function CTASection() {
         </div>
 
         {/* Footer note */}
-        <div data-cta-item>
-          <VisitCounter />
+        <div data-cta-item style={{ textAlign: 'center', width: '100%' }}>
+      <VisitCounter />
         </div>
         <p style={{
           color: 'rgba(255,255,255,0.8)', fontSize: '11px',
