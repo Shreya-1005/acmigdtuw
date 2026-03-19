@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import VisitCounter from '../VisitCounter'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -253,6 +254,9 @@ export default function CTASection() {
         </div>
 
         {/* Footer note */}
+        <div data-cta-item>
+          <VisitCounter />
+        </div>
         <p style={{
           color: 'rgba(255,255,255,0.8)', fontSize: '11px',
           marginTop: '32px', fontFamily: "'Courier New', monospace",
