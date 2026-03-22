@@ -41,7 +41,7 @@ export default function Navbar() {
         onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
         onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.38)'}
       >
-        ← acmigdtuw.com
+        ← Go back
       </a>
     </nav>
   )
