@@ -6,12 +6,12 @@ import '../styling/intern.css'
 gsap.registerPlugin(ScrollTrigger)
 
 const NAV_LINKS = [
-  { label: 'Home',        href: '#hero'     },
-  { label: 'About Us',    href: '#about'    },
+  { label: 'Home',     href: '#hero'     },
+  { label: 'About Us', href: '#about'    },
   { label: 'Timeline', href: '#timeline' },
-  { label: 'Speakers',   href: '#mentors'  },
-  { label: 'Recap',      href: '#recap'    },
-  { label: 'Team',    href: '#team'     },
+  { label: 'Speakers', href: '#mentors'  },
+  { label: 'Recap',    href: '#recap'    },
+  { label: 'Team',     href: '#team'     },
 ]
 
 const TEAM = [
@@ -40,16 +40,21 @@ const FAQS = [
   { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form with your transaction receipt.' },
 ]
 
+// Vite asset imports — place your images at src/assets/recap1.jpg … recap4.jpg
 const RECAP_IMAGES = [
-  { src: '/src/assets/recap1.jpg', alt: 'Internship session 1' },
-  { src: '/src/assets/recap2.jpg', alt: 'Internship session 2' },
-  { src: '/src/assets/recap3.jpg', alt: 'Internship session 3' },
-  { src: '/src/assets/recap4.jpg', alt: 'Internship session 4' },
+  { src: new URL('../assets/recap1.jpg', import.meta.url).href, alt: 'Internship session 1' },
+  { src: new URL('../assets/recap2.jpg', import.meta.url).href, alt: 'Internship session 2' },
+  { src: new URL('../assets/recap3.jpg', import.meta.url).href, alt: 'Internship session 3' },
+  { src: new URL('../assets/recap4.jpg', import.meta.url).href, alt: 'Internship session 4' },
+  { src: new URL('../assets/recap5.jpg', import.meta.url).href, alt: 'Internship session 5' },
 ]
 
 function reveal(ref, sel) {
+  if (!ref.current) return { revert: () => {} }
   return gsap.context(() => {
-    gsap.fromTo(sel ? ref.current.querySelectorAll(sel) : ref.current,
+    const targets = sel ? ref.current.querySelectorAll(sel) : ref.current
+    if (!targets || (targets.length !== undefined && targets.length === 0)) return
+    gsap.fromTo(targets,
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out', stagger: 0.08,
         scrollTrigger: { trigger: ref.current, start: 'top 82%' } }
@@ -79,7 +84,6 @@ export default function SummerInternship2026() {
       reveal(timelineRef, '[data-tl]'),
       reveal(mentorsRef,  '[data-m]'),
       reveal(recapRef,    '[data-rc]'),
-      reveal(teamRef,     '[data-tm]'),
       reveal(payRef,      '[data-p]'),
       reveal(faqRef,      '[data-f]'),
     ]
@@ -99,6 +103,7 @@ export default function SummerInternship2026() {
         <a href="#register" className="ip-btn ip-btn-primary" style={{ padding: '9px 22px', fontSize: '13px' }}>Apply Now</a>
       </nav>
 
+      {/* HERO */}
       <section id="hero" ref={heroRef} className="ip-hero">
         <div className="ip-hero-grid">
           <div>
@@ -132,6 +137,7 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* ABOUT */}
       <section ref={aboutRef} id="about" className="ip-section ip-section-alt">
         <div className="ip-max">
           <div className="ip-about-grid">
@@ -141,15 +147,15 @@ export default function SummerInternship2026() {
                 The ACM IGDTUW Summer Internship is a research-oriented and skill-building initiative designed to bridge the gap between academic theory and industry practice.
               </p>
               <p data-a className="ip-about-text">
-                Our curriculum is meticulously crafted to empower women in tech through hands-on development in fields like AI/ML, Web3, Cloud Infrastructure, and Cyber Security. Under the guidance of renowned faculty and industry veterans, interns will tackle real-world problem statements.
+                Our curriculum empowers women in tech through hands-on development in AI/ML, Web3, Cloud Infrastructure, and Cyber Security. Under the guidance of renowned faculty and industry veterans, interns tackle real-world problem statements.
               </p>
             </div>
             <div className="ip-detail-grid">
               {[
-                { icon: '📅', label: 'Duration',   sub: '8 Weeks (June - Aug 2026)'    },
-                { icon: '📍', label: 'Mode',       sub: 'Hybrid (On-campus & Remote)'  },
-                { icon: '💳', label: 'Fee',        sub: 'INR 3,500 (Early Bird)'       },
-                { icon: '🧠', label: 'Mentorship', sub: '1:1 Industry Connect'         },
+                { icon: '📅', label: 'Duration',   sub: '8 Weeks (June – Aug 2026)'   },
+                { icon: '📍', label: 'Mode',       sub: 'Hybrid (On-campus & Remote)' },
+                { icon: '💳', label: 'Fee',        sub: 'INR 3,500 (Early Bird)'      },
+                { icon: '🧠', label: 'Mentorship', sub: '1:1 Industry Connect'        },
               ].map(({ icon, label, sub }) => (
                 <div key={label} data-a className="ip-card ip-detail-card">
                   <div className="ip-detail-icon">{icon}</div>
@@ -162,6 +168,7 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* TIMELINE */}
       <section ref={timelineRef} id="timeline" className="ip-section">
         <div className="ip-max-md">
           <h2 data-tl className="ip-section-title ip-section-center" style={{ marginBottom: '56px' }}>Program Timeline</h2>
@@ -179,6 +186,7 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* SPEAKERS */}
       <section ref={mentorsRef} id="mentors" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-m className="ip-section-title ip-section-center">Academic Guidance</h2>
@@ -211,73 +219,70 @@ export default function SummerInternship2026() {
       </section>
 
       {/* RECAP */}
-      <section ref={recapRef} id="recap" className="ip-section">
-        <div className="ip-max">
-          <div data-rc className="ip-recap-header">
-            <div className="ip-hero-badge" style={{ marginBottom: '16px' }}>2024–25 Edition</div>
-            <h2 className="ip-section-title">What We Did Last Time</h2>
+      <section ref={recapRef} id="recap" className="ip-recap-section">
+        <div className="ip-recap-mosaic">
+
+          <div data-rc className="ip-rcell ip-rcell-badge">
+            <div className="ip-hero-badge" style={{ marginBottom: '14px' }}>2024–25 Edition</div>
+            <h2 className="ip-section-title">What We Did<br />Last Time</h2>
           </div>
 
-          <div data-rc className="ip-recap-writeup-full">
-            <p className="ip-about-text">
-              The 2024–25 ACM IGDTUW Summer Internship was a milestone edition — one that set the bar for what student-led research programs can achieve. With <strong>180+ group applications</strong> pouring in from across disciplines and institutions, the response far exceeded expectations, reflecting the program’s growing reputation as a launchpad for meaningful technical work.
+          <div data-rc className="ip-rcell ip-rcell-writeup">
+            <p className="ip-about-text" style={{ marginBottom: '14px' }}>
+              The 2024–25 ACM IGDTUW Summer Internship was a milestone edition — one that set the bar for what student-led research programs can achieve. With <strong>180+ group applications</strong> pouring in from across disciplines and institutions, the response far exceeded expectations.
             </p>
-            <p className="ip-about-text">
-              After a rigorous evaluation of submitted research proposals and preliminary reports, <strong>32 exceptional groups</strong> were shortlisted. Each team brought a distinct perspective, tackling problem statements across some of today’s most consequential domains — from large language models and generative AI to blockchain infrastructure, deep learning, cybersecurity, and healthcare technology solutions.
+            <p className="ip-about-text" style={{ marginBottom: '14px' }}>
+              After a rigorous evaluation, <strong>32 exceptional groups</strong> were shortlisted — each tackling problem statements across AI, LLMs, Blockchain, DL/ML, Cybersecurity, and Healthcare Solutions.
             </p>
-            <p className="ip-about-text">
-              Over the course of <strong>six months</strong>, participants were mentored by a panel of <strong>15 dedicated mentors</strong> — a blend of faculty experts and industry practitioners who guided teams through the full arc of research: ideation, literature review, experimentation, critical analysis, and final presentation. The result was a cohort of interns who didn’t just learn about innovation — they practised it.
+            <p className="ip-about-text" style={{ marginBottom: 0 }}>
+              Over <strong>six months</strong>, participants were mentored by <strong>15 dedicated mentors</strong> through the full arc of research: ideation, literature review, experimentation, and final presentation.
             </p>
-            <div className="ip-recap-stats-row">
-              {[
-                { val: '180+', label: 'Applications' },
-                { val: '32',   label: 'Groups Selected' },
-                { val: '15',   label: 'Mentors' },
-                { val: '6mo',  label: 'Duration' },
-              ].map(({ val, label }) => (
-                <div key={label} className="ip-recap-stat">
-                  <div className="ip-recap-stat-val">{val}</div>
-                  <div className="ip-recap-stat-label">{label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          <div className="ip-recap-bottom-grid">
-            <div data-rc className="ip-recap-pdf-embed">
-              <div className="ip-recap-pdf-embed-header">
-                <span className="ip-recap-pdf-icon">📄</span>
-                <div>
-                  <div className="ip-recap-pdf-title">2024–25 Program Magazine</div>
-                  <div className="ip-recap-pdf-sub">Research highlights, projects & more</div>
-                </div>
-                <a
-                  href="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ip-recap-pdf-arrow"
-                  title="Open in new tab"
-                >↗</a>
+          <div data-rc className="ip-rcell ip-rcell-stats">
+            {[
+              { val: '180+', label: 'Applications' },
+              { val: '32',   label: 'Groups'       },
+              { val: '15',   label: 'Mentors'      },
+              { val: '6mo',  label: 'Duration'     },
+            ].map(({ val, label }) => (
+              <div key={label} className="ip-recap-stat">
+                <div className="ip-recap-stat-val">{val}</div>
+                <div className="ip-recap-stat-label">{label}</div>
               </div>
-              <iframe
-                src="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/preview"
-                className="ip-recap-pdf-frame"
-                allow="autoplay"
-                title="2024–25 Program Magazine"
-              />
-            </div>
-
-            <div data-rc className="ip-recap-gallery">
-              {RECAP_IMAGES.map(({ src, alt }, i) => (
-                <div key={i} className="ip-recap-img-wrap">
-                  <img src={src} alt={alt} className="ip-recap-img" />
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
+
+          <div data-rc className="ip-rcell ip-rcell-tracks">
+            <div className="ip-rcell-tracks-title">Research Tracks</div>
+            {['AI / ML', 'LLMs', 'Blockchain', 'Cybersecurity', 'Healthcare AI', 'Cloud & Infra'].map(t => (
+              <div key={t} className="ip-rcell-track-item"><div className="ip-rcell-track-dot" />{t}</div>
+            ))}
+          </div>
+
+          <div data-rc className="ip-rcell ip-rcell-pdf">
+            <div className="ip-recap-pdf-embed-header">
+              <span className="ip-recap-pdf-icon">📄</span>
+              <div>
+                <div className="ip-recap-pdf-title">2024–25 Program Magazine</div>
+                <div className="ip-recap-pdf-sub">Research highlights, projects & more</div>
+              </div>
+              <a href="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="ip-recap-pdf-arrow">↗</a>
+            </div>
+            <iframe src="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/preview" className="ip-recap-pdf-frame" allow="autoplay" title="2024–25 Program Magazine" />
+          </div>
+
+          {RECAP_IMAGES.map(({ src, alt }, i) => (
+            <div key={i} data-rc className={`ip-rcell ip-rcell-img ip-rcell-img-${i}`}>
+              <img src={src} alt={alt} className="ip-recap-img"
+                onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.style.background = '#dde5ec' }} />
+            </div>
+          ))}
+
         </div>
       </section>
 
+      {/* TEAM */}
       <section ref={teamRef} id="team" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-tm className="ip-section-title ip-section-center">Student Leadership</h2>
@@ -302,11 +307,12 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* PAYMENT */}
       <section ref={payRef} id="register" className="ip-payment-section">
         <div data-p className="ip-payment-card">
           <div>
             <h2 className="ip-payment-title">Payment & Registration</h2>
-            <p className="ip-payment-desc">Please complete the registration fee payment via NEFT/UPI and attach the transaction receipt to the application form.</p>
+            <p className="ip-payment-desc">Complete the registration fee payment via NEFT/UPI and attach the transaction receipt to the application form.</p>
             {[
               ['Account Name:',   'ACM IGDTUW Student Chapter'],
               ['Account Number:', '09001000018964'],
@@ -330,6 +336,7 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* FAQ */}
       <section ref={faqRef} className="ip-section ip-section-alt">
         <div className="ip-max-sm">
           <h2 data-f className="ip-section-title ip-section-center">Frequently Asked Questions</h2>
@@ -339,6 +346,7 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="ip-footer">
         <div className="ip-footer-grid">
           <div>
