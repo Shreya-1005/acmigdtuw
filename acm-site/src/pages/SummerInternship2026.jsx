@@ -7,10 +7,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 const NAV_LINKS = [
   { label: 'Home',        href: '#hero'     },
-  { label: 'Programs',    href: '#about'    },
-  { label: 'Internships', href: '#timeline' },
-  { label: 'Resources',   href: '#mentors'  },
-  { label: 'About Us',    href: '#team'     },
+  { label: 'About Us',    href: '#about'    },
+  { label: 'Timeline', href: '#timeline' },
+  { label: 'Speakers',   href: '#mentors'  },
+  { label: 'Recap',      href: '#recap'    },
+  { label: 'Team',    href: '#team'     },
 ]
 
 const TEAM = [
@@ -39,6 +40,13 @@ const FAQS = [
   { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form with your transaction receipt.' },
 ]
 
+const RECAP_IMAGES = [
+  { src: '/src/assets/recap1.jpg', alt: 'Internship session 1' },
+  { src: '/src/assets/recap2.jpg', alt: 'Internship session 2' },
+  { src: '/src/assets/recap3.jpg', alt: 'Internship session 3' },
+  { src: '/src/assets/recap4.jpg', alt: 'Internship session 4' },
+]
+
 function reveal(ref, sel) {
   return gsap.context(() => {
     gsap.fromTo(sel ? ref.current.querySelectorAll(sel) : ref.current,
@@ -55,6 +63,7 @@ export default function SummerInternship2026() {
   const aboutRef    = useRef()
   const timelineRef = useRef()
   const mentorsRef  = useRef()
+  const recapRef    = useRef()
   const teamRef     = useRef()
   const payRef      = useRef()
   const faqRef      = useRef()
@@ -69,6 +78,7 @@ export default function SummerInternship2026() {
       reveal(aboutRef,    '[data-a]'),
       reveal(timelineRef, '[data-tl]'),
       reveal(mentorsRef,  '[data-m]'),
+      reveal(recapRef,    '[data-rc]'),
       reveal(teamRef,     '[data-tm]'),
       reveal(payRef,      '[data-p]'),
       reveal(faqRef,      '[data-f]'),
@@ -79,7 +89,6 @@ export default function SummerInternship2026() {
   return (
     <div className="ip">
 
-      {/* NAV */}
       <nav ref={navRef} className={`ip-nav${scrolled ? ' scrolled' : ''}`}>
         <a href="#hero" className="ip-nav-brand">ACM IGDTUW</a>
         <div className="ip-nav-links">
@@ -90,7 +99,6 @@ export default function SummerInternship2026() {
         <a href="#register" className="ip-btn ip-btn-primary" style={{ padding: '9px 22px', fontSize: '13px' }}>Apply Now</a>
       </nav>
 
-      {/* HERO */}
       <section id="hero" ref={heroRef} className="ip-hero">
         <div className="ip-hero-grid">
           <div>
@@ -124,7 +132,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* ABOUT */}
       <section ref={aboutRef} id="about" className="ip-section ip-section-alt">
         <div className="ip-max">
           <div className="ip-about-grid">
@@ -136,7 +143,6 @@ export default function SummerInternship2026() {
               <p data-a className="ip-about-text">
                 Our curriculum is meticulously crafted to empower women in tech through hands-on development in fields like AI/ML, Web3, Cloud Infrastructure, and Cyber Security. Under the guidance of renowned faculty and industry veterans, interns will tackle real-world problem statements.
               </p>
-              <a data-a href="#" className="ip-download-link">Download Brochure ↓</a>
             </div>
             <div className="ip-detail-grid">
               {[
@@ -156,7 +162,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* TIMELINE */}
       <section ref={timelineRef} id="timeline" className="ip-section">
         <div className="ip-max-md">
           <h2 data-tl className="ip-section-title ip-section-center" style={{ marginBottom: '56px' }}>Program Timeline</h2>
@@ -174,7 +179,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* ACADEMIC GUIDANCE */}
       <section ref={mentorsRef} id="mentors" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-m className="ip-section-title ip-section-center">Academic Guidance</h2>
@@ -206,8 +210,75 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* TEAM */}
-      <section ref={teamRef} id="team" className="ip-section">
+      {/* RECAP */}
+      <section ref={recapRef} id="recap" className="ip-section">
+        <div className="ip-max">
+          <div data-rc className="ip-recap-header">
+            <div className="ip-hero-badge" style={{ marginBottom: '16px' }}>2024–25 Edition</div>
+            <h2 className="ip-section-title">What We Did Last Time</h2>
+          </div>
+
+          <div data-rc className="ip-recap-writeup-full">
+            <p className="ip-about-text">
+              The 2024–25 ACM IGDTUW Summer Internship was a milestone edition — one that set the bar for what student-led research programs can achieve. With <strong>180+ group applications</strong> pouring in from across disciplines and institutions, the response far exceeded expectations, reflecting the program’s growing reputation as a launchpad for meaningful technical work.
+            </p>
+            <p className="ip-about-text">
+              After a rigorous evaluation of submitted research proposals and preliminary reports, <strong>32 exceptional groups</strong> were shortlisted. Each team brought a distinct perspective, tackling problem statements across some of today’s most consequential domains — from large language models and generative AI to blockchain infrastructure, deep learning, cybersecurity, and healthcare technology solutions.
+            </p>
+            <p className="ip-about-text">
+              Over the course of <strong>six months</strong>, participants were mentored by a panel of <strong>15 dedicated mentors</strong> — a blend of faculty experts and industry practitioners who guided teams through the full arc of research: ideation, literature review, experimentation, critical analysis, and final presentation. The result was a cohort of interns who didn’t just learn about innovation — they practised it.
+            </p>
+            <div className="ip-recap-stats-row">
+              {[
+                { val: '180+', label: 'Applications' },
+                { val: '32',   label: 'Groups Selected' },
+                { val: '15',   label: 'Mentors' },
+                { val: '6mo',  label: 'Duration' },
+              ].map(({ val, label }) => (
+                <div key={label} className="ip-recap-stat">
+                  <div className="ip-recap-stat-val">{val}</div>
+                  <div className="ip-recap-stat-label">{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="ip-recap-bottom-grid">
+            <div data-rc className="ip-recap-pdf-embed">
+              <div className="ip-recap-pdf-embed-header">
+                <span className="ip-recap-pdf-icon">📄</span>
+                <div>
+                  <div className="ip-recap-pdf-title">2024–25 Program Magazine</div>
+                  <div className="ip-recap-pdf-sub">Research highlights, projects & more</div>
+                </div>
+                <a
+                  href="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ip-recap-pdf-arrow"
+                  title="Open in new tab"
+                >↗</a>
+              </div>
+              <iframe
+                src="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/preview"
+                className="ip-recap-pdf-frame"
+                allow="autoplay"
+                title="2024–25 Program Magazine"
+              />
+            </div>
+
+            <div data-rc className="ip-recap-gallery">
+              {RECAP_IMAGES.map(({ src, alt }, i) => (
+                <div key={i} className="ip-recap-img-wrap">
+                  <img src={src} alt={alt} className="ip-recap-img" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section ref={teamRef} id="team" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-tm className="ip-section-title ip-section-center">Student Leadership</h2>
           <div className="ip-team-grid">
@@ -231,7 +302,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* PAYMENT */}
       <section ref={payRef} id="register" className="ip-payment-section">
         <div data-p className="ip-payment-card">
           <div>
@@ -260,7 +330,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section ref={faqRef} className="ip-section ip-section-alt">
         <div className="ip-max-sm">
           <h2 data-f className="ip-section-title ip-section-center">Frequently Asked Questions</h2>
@@ -270,7 +339,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="ip-footer">
         <div className="ip-footer-grid">
           <div>
