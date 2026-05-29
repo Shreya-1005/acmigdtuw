@@ -11,7 +11,6 @@ const NAV_LINKS = [
   { label: 'Timeline', href: '#timeline' },
   { label: 'Speakers', href: '#mentors'  },
   { label: 'Recap',    href: '#recap'    },
-  { label: 'Team',     href: '#team'     },
 ]
 
 const TEAM = [
@@ -40,7 +39,6 @@ const FAQS = [
   { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form with your transaction receipt.' },
 ]
 
-// Vite asset imports — place your images at src/assets/recap1.jpg … recap4.jpg
 const RECAP_IMAGES = [
   { src: new URL('../assets/recap1.jpg', import.meta.url).href, alt: 'Internship session 1' },
   { src: new URL('../assets/recap2.jpg', import.meta.url).href, alt: 'Internship session 2' },
@@ -57,13 +55,198 @@ function reveal(ref, sel) {
     gsap.fromTo(targets,
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out', stagger: 0.08,
-        scrollTrigger: { trigger: ref.current, start: 'top 82%' } }
+        scrollTrigger: { trigger: ref.current, start: 'top 95%', toggleActions: 'play none none none', once: true } }
     )
   }, ref)
 }
 
+const CODE_LINES = [
+  { indent: 0, tokens: [{ t: 'keyword', v: 'import ' }, { t: 'normal', v: '{ useState, useEffect } ' }, { t: 'keyword', v: 'from ' }, { t: 'string', v: "'react'" }] },
+  { indent: 0, tokens: [{ t: 'keyword', v: 'import ' }, { t: 'normal', v: 'axios ' }, { t: 'keyword', v: 'from ' }, { t: 'string', v: "'axios'" }] },
+  { indent: 0, tokens: [] },
+  { indent: 0, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'fn', v: 'ACMProject' }, { t: 'normal', v: ' = () => {' }] },
+  { indent: 1, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'normal', v: '[data, setData] = ' }, { t: 'fn', v: 'useState' }, { t: 'normal', v: '([])' }] },
+  { indent: 1, tokens: [{ t: 'keyword', v: 'const ' }, { t: 'normal', v: '[loading, setLoading] = ' }, { t: 'fn', v: 'useState' }, { t: 'normal', v: '(' }, { t: 'bool', v: 'true' }, { t: 'normal', v: ')' }] },
+  { indent: 0, tokens: [] },
+  { indent: 1, tokens: [{ t: 'fn', v: 'useEffect' }, { t: 'normal', v: '(() => {' }] },
+  { indent: 2, tokens: [{ t: 'comment', v: '// fetch internship data' }] },
+  { indent: 2, tokens: [{ t: 'fn', v: 'fetchProjects' }, { t: 'normal', v: '().then(res => ' }, { t: 'fn', v: 'setData' }, { t: 'normal', v: '(res))' }] },
+  { indent: 1, tokens: [{ t: 'normal', v: '}, [])' }] },
+  { indent: 0, tokens: [] },
+  { indent: 1, tokens: [{ t: 'keyword', v: 'return ' }, { t: 'normal', v: '(' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '<div ' }, { t: 'attr', v: 'className' }, { t: 'normal', v: '=' }, { t: 'string', v: '"acm-wrap"' }, { t: 'tag', v: '>' }] },
+  { indent: 3, tokens: [{ t: 'tag', v: '<HeroSection ' }, { t: 'attr', v: 'data' }, { t: 'normal', v: '={data} ' }, { t: 'tag', v: '/>' }] },
+  { indent: 2, tokens: [{ t: 'tag', v: '</div>' }] },
+  { indent: 1, tokens: [{ t: 'normal', v: ')' }] },
+  { indent: 0, tokens: [{ t: 'normal', v: '}' }] },
+]
+
+function AnimatedWorkspace({ mousePos }) {
+  const [visibleLines, setVisibleLines] = useState(0)
+  const [cursorVisible, setCursorVisible] = useState(true)
+  const [terminalLines, setTerminalLines] = useState([])
+  const terminalQueue = [
+    '$ npm run dev',
+    '▸ Ready on http://localhost:5173',
+    '$ git commit -m "feat: hero animation"',
+    '✓ [main 3a9f2c1] feat: hero animation',
+    '$ npm run build',
+    '✓ Build complete in 1.2s',
+  ]
+
+  useEffect(() => {
+    let line = 0
+    const iv = setInterval(() => {
+      if (line < CODE_LINES.length) { setVisibleLines(l => l + 1); line++ }
+      else { line = 0; setVisibleLines(0) }
+    }, 280)
+    return () => clearInterval(iv)
+  }, [])
+
+  useEffect(() => {
+    const iv = setInterval(() => setCursorVisible(v => !v), 530)
+    return () => clearInterval(iv)
+  }, [])
+
+  useEffect(() => {
+    let idx = 0
+    const iv = setInterval(() => {
+      setTerminalLines(prev => {
+        const next = [...prev, terminalQueue[idx % terminalQueue.length]]
+        idx++
+        return next.slice(-4)
+      })
+    }, 2200)
+    return () => clearInterval(iv)
+  }, [])
+
+  const mx = mousePos.x
+  const my = mousePos.y
+  const tiltX = (my - 0.5) * 6
+  const tiltY = (mx - 0.5) * -6
+
+  const floatStyle = (baseX, baseY, speed, amp) => ({
+    transform: `translate(${(mx - 0.5) * amp * 18}px, ${(my - 0.5) * amp * 12}px)`,
+    transition: `transform ${speed}s ease-out`,
+    position: 'absolute',
+    left: baseX,
+    top: baseY,
+  })
+
+  return (
+    <div className="ip-ws-scene">
+      <div
+        className="ip-ws-laptop-wrap"
+        style={{
+          transform: `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+          transition: 'transform 0.35s ease-out',
+        }}
+      >
+        <div className="ip-ws-laptop">
+          <div className="ip-ws-screen">
+            <div className="ip-ws-titlebar">
+              <span className="ip-ws-tb-dot ip-ws-tb-red" />
+              <span className="ip-ws-tb-dot ip-ws-tb-yellow" />
+              <span className="ip-ws-tb-dot ip-ws-tb-green" />
+              <span className="ip-ws-tb-filename">ACMProject.jsx</span>
+            </div>
+            <div className="ip-ws-editor">
+              <div className="ip-ws-gutter">
+                {CODE_LINES.slice(0, visibleLines).map((_, i) => (
+                  <div key={i} className="ip-ws-lineno">{i + 1}</div>
+                ))}
+              </div>
+              <div className="ip-ws-codebody">
+                {CODE_LINES.slice(0, visibleLines).map((line, i) => (
+                  <div key={i} className="ip-ws-codeline" style={{ paddingLeft: `${line.indent * 14}px` }}>
+                    {line.tokens.map((tok, j) => (
+                      <span key={j} className={`ip-ws-tok-${tok.t}`}>{tok.v}</span>
+                    ))}
+                    {i === visibleLines - 1 && (
+                      <span className={`ip-ws-cursor${cursorVisible ? '' : ' ip-ws-cursor-hidden'}`}>|</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="ip-ws-terminal">
+              <div className="ip-ws-term-bar">TERMINAL</div>
+              {terminalLines.map((l, i) => (
+                <div key={i} className={`ip-ws-term-line${l.startsWith('✓') ? ' ip-ws-term-ok' : l.startsWith('$') ? ' ip-ws-term-cmd' : ''}`}>{l}</div>
+              ))}
+            </div>
+          </div>
+          <div className="ip-ws-base" />
+          <div className="ip-ws-stand" />
+          <div className="ip-ws-keyboard">
+            {Array.from({ length: 30 }).map((_, i) => <span key={i} className="ip-ws-key" />)}
+          </div>
+        </div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-react" style={floatStyle('6%', '8%', 0.55, 0.25)}>
+        <svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="5" fill="#00c4e0"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2" transform="rotate(60 21 21)"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2" transform="rotate(-60 21 21)"/></svg>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-git" style={floatStyle('82%', '4%', 0.7, 0.2)}>
+        <svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 2 L30 10 L30 26 L18 34 L6 26 L6 10 Z" fill="none" stroke="#006d7a" strokeWidth="2"/><circle cx="18" cy="12" r="3" fill="#006d7a"/><circle cx="12" cy="22" r="3" fill="#006d7a"/><circle cx="24" cy="22" r="3" fill="#006d7a"/><line x1="18" y1="15" x2="12" y2="19" stroke="#006d7a" strokeWidth="1.5"/><line x1="18" y1="15" x2="24" y2="19" stroke="#006d7a" strokeWidth="1.5"/></svg>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-trophy" style={floatStyle('88%', '62%', 0.6, 0.15)}>
+        <div className="ip-ws-badge-chip">
+          <span>🏆</span><span>Hackathon</span>
+        </div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-coffee" style={floatStyle('4%', '70%', 0.8, 0.3)}>
+        <svg width="38" height="38" viewBox="0 0 38 38"><rect x="6" y="14" width="20" height="18" rx="4" fill="#e8f4f8" stroke="#006d7a" strokeWidth="1.5"/><path d="M26 18 Q34 18 34 23 Q34 28 26 28" fill="none" stroke="#006d7a" strokeWidth="1.5"/><path d="M12 8 Q14 4 12 2" stroke="#00c4e0" strokeWidth="1.5" fill="none" strokeLinecap="round"/><path d="M17 8 Q19 4 17 2" stroke="#00c4e0" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-snippet1" style={floatStyle('78%', '30%', 0.65, 0.22)}>
+        <div className="ip-ws-snippet">
+          <span className="ip-ws-tok-keyword">async </span>
+          <span className="ip-ws-tok-fn">fetch</span>
+          <span className="ip-ws-tok-normal">(url)</span>
+        </div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-snippet2" style={floatStyle('2%', '38%', 0.5, 0.28)}>
+        <div className="ip-ws-snippet">
+          <span className="ip-ws-tok-tag">{'<'}</span>
+          <span className="ip-ws-tok-fn">Component</span>
+          <span className="ip-ws-tok-tag">{'/>'}</span>
+        </div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-acm" style={floatStyle('44%', '2%', 0.72, 0.18)}>
+        <div className="ip-ws-acm-badge">ACM</div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-node1" style={floatStyle('70%', '82%', 0.58, 0.2)}>
+        <svg width="44" height="28" viewBox="0 0 44 28"><circle cx="6" cy="14" r="5" fill="none" stroke="#00c4e0" strokeWidth="1.5"/><circle cx="22" cy="6" r="5" fill="none" stroke="#006d7a" strokeWidth="1.5"/><circle cx="38" cy="14" r="5" fill="none" stroke="#00c4e0" strokeWidth="1.5"/><circle cx="22" cy="22" r="5" fill="none" stroke="#005f7f" strokeWidth="1.5"/><line x1="11" y1="14" x2="17" y2="9" stroke="#006d7a" strokeWidth="1"/><line x1="27" y1="9" x2="33" y2="13" stroke="#006d7a" strokeWidth="1"/><line x1="11" y1="16" x2="17" y2="20" stroke="#006d7a" strokeWidth="1"/><line x1="27" y1="20" x2="33" y2="16" stroke="#006d7a" strokeWidth="1"/></svg>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-sticky" style={floatStyle('8%', '18%', 0.62, 0.25)}>
+        <div className="ip-ws-sticky">
+          <div>ship it 🚀</div>
+          <div>by friday!</div>
+        </div>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-geo1" style={floatStyle('60%', '88%', 0.75, 0.12)}>
+        <svg width="28" height="28" viewBox="0 0 28 28"><polygon points="14,2 26,22 2,22" fill="none" stroke="#00c4e0" strokeWidth="2"/></svg>
+      </div>
+
+      <div className="ip-ws-float ip-ws-float-geo2" style={floatStyle('92%', '45%', 0.68, 0.1)}>
+        <svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="3" width="16" height="16" rx="3" fill="none" stroke="#006d7a" strokeWidth="2" transform="rotate(15 11 11)"/></svg>
+      </div>
+    </div>
+  )
+}
+
 export default function SummerInternship2026() {
   const [scrolled, setScrolled] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
   const heroRef     = useRef()
   const aboutRef    = useRef()
   const timelineRef = useRef()
@@ -78,6 +261,12 @@ export default function SummerInternship2026() {
     gsap.fromTo(navRef.current, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out', delay: 0.1 })
     const onScroll = () => setScrolled(window.scrollY > 30)
     window.addEventListener('scroll', onScroll, { passive: true })
+
+    const onMouse = (e) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight })
+    }
+    window.addEventListener('mousemove', onMouse, { passive: true })
+
     const ctxs = [
       reveal(heroRef,     '[data-h]'),
       reveal(aboutRef,    '[data-a]'),
@@ -87,7 +276,11 @@ export default function SummerInternship2026() {
       reveal(payRef,      '[data-p]'),
       reveal(faqRef,      '[data-f]'),
     ]
-    return () => { window.removeEventListener('scroll', onScroll); ctxs.forEach(c => c.revert()) }
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('mousemove', onMouse)
+      ctxs.forEach(c => c.revert())
+    }
   }, [])
 
   return (
@@ -103,10 +296,9 @@ export default function SummerInternship2026() {
         <a href="#register" className="ip-btn ip-btn-primary" style={{ padding: '9px 22px', fontSize: '13px' }}>Apply Now</a>
       </nav>
 
-      {/* HERO */}
-      <section id="hero" ref={heroRef} className="ip-hero">
-        <div className="ip-hero-grid">
-          <div>
+      <section id="hero" ref={heroRef} className="ip-hero ip-hero-animated">
+        <div className="ip-hero-animated-inner">
+          <div className="ip-hero-text-col">
             <div data-h className="ip-hero-badge">Registration Open for 2026</div>
             <h1 data-h className="ip-hero-title">
               Elevate Your Engineering<br />
@@ -119,25 +311,26 @@ export default function SummerInternship2026() {
               <a href="#register" className="ip-btn ip-btn-primary">Begin Application →</a>
               <a href="#timeline" className="ip-btn ip-btn-ghost">View Curriculum</a>
             </div>
+            <div className="ip-hero-stats-row">
+              {[
+                { val: '500+', label: 'Alumni' },
+                { val: '24+',  label: 'Tracks' },
+                { val: '8w',   label: 'Program' },
+                { val: '100%', label: 'Cert Rate' },
+              ].map(({ val, label }) => (
+                <div key={label} data-h className="ip-hero-stat-pill">
+                  <span className="ip-hero-stat-pill-val">{val}</span>
+                  <span className="ip-hero-stat-pill-label">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="ip-stats-grid">
-            {[
-              { icon: '👥', val: '500+', label: 'Alumni Network'    },
-              { icon: '💻', val: '24+',  label: 'Project Tracks'    },
-              { icon: '📋', val: '8w',   label: 'Immersive Learning' },
-              { icon: '🏅', val: '100%', label: 'Completion Rate'   },
-            ].map(({ icon, val, label }) => (
-              <div key={label} data-h className="ip-stat-card">
-                <div className="ip-stat-icon">{icon}</div>
-                <div className="ip-stat-val">{val}</div>
-                <div className="ip-stat-label">{label}</div>
-              </div>
-            ))}
+          <div className="ip-hero-ws-col">
+            <AnimatedWorkspace mousePos={mousePos} />
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
       <section ref={aboutRef} id="about" className="ip-section ip-section-alt">
         <div className="ip-max">
           <div className="ip-about-grid">
@@ -168,7 +361,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* TIMELINE */}
       <section ref={timelineRef} id="timeline" className="ip-section">
         <div className="ip-max-md">
           <h2 data-tl className="ip-section-title ip-section-center" style={{ marginBottom: '56px' }}>Program Timeline</h2>
@@ -186,7 +378,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* SPEAKERS */}
       <section ref={mentorsRef} id="mentors" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-m className="ip-section-title ip-section-center">Academic Guidance</h2>
@@ -218,15 +409,12 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* RECAP */}
       <section ref={recapRef} id="recap" className="ip-recap-section">
         <div className="ip-recap-mosaic">
-
           <div data-rc className="ip-rcell ip-rcell-badge">
             <div className="ip-hero-badge" style={{ marginBottom: '14px' }}>2024–25 Edition</div>
             <h2 className="ip-section-title">What We Did<br />Last Time</h2>
           </div>
-
           <div data-rc className="ip-rcell ip-rcell-writeup">
             <p className="ip-about-text" style={{ marginBottom: '14px' }}>
               The 2024–25 ACM IGDTUW Summer Internship was a milestone edition — one that set the bar for what student-led research programs can achieve. With <strong>180+ group applications</strong> pouring in from across disciplines and institutions, the response far exceeded expectations.
@@ -238,7 +426,6 @@ export default function SummerInternship2026() {
               Over <strong>six months</strong>, participants were mentored by <strong>15 dedicated mentors</strong> through the full arc of research: ideation, literature review, experimentation, and final presentation.
             </p>
           </div>
-
           <div data-rc className="ip-rcell ip-rcell-stats">
             {[
               { val: '180+', label: 'Applications' },
@@ -252,14 +439,12 @@ export default function SummerInternship2026() {
               </div>
             ))}
           </div>
-
           <div data-rc className="ip-rcell ip-rcell-tracks">
             <div className="ip-rcell-tracks-title">Research Tracks</div>
             {['AI / ML', 'LLMs', 'Blockchain', 'Cybersecurity', 'Healthcare AI', 'Cloud & Infra'].map(t => (
               <div key={t} className="ip-rcell-track-item"><div className="ip-rcell-track-dot" />{t}</div>
             ))}
           </div>
-
           <div data-rc className="ip-rcell ip-rcell-pdf">
             <div className="ip-recap-pdf-embed-header">
               <span className="ip-recap-pdf-icon">📄</span>
@@ -271,43 +456,15 @@ export default function SummerInternship2026() {
             </div>
             <iframe src="https://drive.google.com/file/d/19lNUrYA2OtOGDsV7WZET_hak1JXfpGnQ/preview" className="ip-recap-pdf-frame" allow="autoplay" title="2024–25 Program Magazine" />
           </div>
-
           {RECAP_IMAGES.map(({ src, alt }, i) => (
             <div key={i} data-rc className={`ip-rcell ip-rcell-img ip-rcell-img-${i}`}>
               <img src={src} alt={alt} className="ip-recap-img"
                 onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement.style.background = '#dde5ec' }} />
             </div>
           ))}
-
         </div>
       </section>
 
-      {/* TEAM */}
-      <section ref={teamRef} id="team" className="ip-section ip-section-alt">
-        <div className="ip-max">
-          <h2 data-tm className="ip-section-title ip-section-center">Student Leadership</h2>
-          <div className="ip-team-grid">
-            {TEAM.map(({ name, role, branch, color }) => {
-              const initials = name.split(' ').map(n => n[0]).join('')
-              return (
-                <div key={name} data-tm className="ip-card ip-team-card">
-                  <div className="ip-team-avatar" style={{ background: `${color}18`, border: `2px solid ${color}44`, color }}>
-                    {initials}
-                    <div style={{ position: 'absolute', top: 3, right: 3, width: 7, height: 7, borderRadius: '50%', background: color, animation: 'ip-pulse 2s ease-in-out infinite' }} />
-                  </div>
-                  <div>
-                    <div className="ip-team-name">{name}</div>
-                    <div className="ip-team-role" style={{ color }}>{role}</div>
-                    <div className="ip-team-branch">{branch}</div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* PAYMENT */}
       <section ref={payRef} id="register" className="ip-payment-section">
         <div data-p className="ip-payment-card">
           <div>
@@ -336,7 +493,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section ref={faqRef} className="ip-section ip-section-alt">
         <div className="ip-max-sm">
           <h2 data-f className="ip-section-title ip-section-center">Frequently Asked Questions</h2>
@@ -346,7 +502,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="ip-footer">
         <div className="ip-footer-grid">
           <div>
