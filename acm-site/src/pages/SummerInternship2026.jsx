@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styling/intern.css'
+import pic1 from '../assets/pic1.png'
+import pic2 from '../assets/pic2.png'
+import pic3 from '../assets/pic3.png'
+import test1 from '../assets/test1.png'
+import test2 from '../assets/test2.png'
+import drshweta from '../assets/drshweta.png'
+import rishabhs from '../assets/rishabhsir.png'
+import collage from '../assets/collage.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,20 +21,22 @@ const NAV_LINKS = [
   { label: 'Recap',    href: '#recap'    },
 ]
 
+const BACK_LINK = '/'
+
 const TEAM = [
-  { name: 'Shriya Panda',       role: 'President',             branch: 'B.Tech IT',     color: '#00c4e0' },
-  { name: 'Vanshika Sehrawat',  role: 'VP — Technical',        branch: 'B.Tech AIML',   color: '#0082aa' },
-  { name: 'Diya Sindhu',        role: 'VP — Planning',         branch: 'B.Tech CSE',    color: '#00c4e0' },
-  { name: 'Ishita Gupta',       role: 'VP — Finances',         branch: 'B.Tech CSE-AI', color: '#005f7f' },
-  { name: 'Shreya Shrivastava', role: 'Event Head',            branch: 'B.Tech CSE-AI', color: '#0082aa' },
-  { name: 'Rabbika Azmi',       role: 'Technical Lead',        branch: 'B.Tech IT',     color: '#00c4e0' },
-  { name: 'Tanisha Ojha',       role: 'Web Dev / Design Head', branch: 'B.Tech IT',     color: '#005f7f' },
+  { name: 'Shriya Panda',       role: 'President',             branch: 'B.Tech IT',     color: '#5B5FFF' },
+  { name: 'Vanshika Sehrawat',  role: 'VP — Technical',        branch: 'B.Tech AIML',   color: '#4B4FD1' },
+  { name: 'Diya Sindhu',        role: 'VP — Planning',         branch: 'B.Tech CSE',    color: '#5B5FFF' },
+  { name: 'Ishita Gupta',       role: 'VP — Finances',         branch: 'B.Tech CSE-AI', color: '#3E42B0' },
+  { name: 'Shreya Shrivastava', role: 'Event Head',            branch: 'B.Tech CSE-AI', color: '#4B4FD1' },
+  { name: 'Rabbika Azmi',       role: 'Technical Lead',        branch: 'B.Tech IT',     color: '#5B5FFF' },
+  { name: 'Tanisha Ojha',       role: 'Web Dev / Design Head', branch: 'B.Tech IT',     color: '#3E42B0' },
 ]
 
 const TIMELINE = [
-  { date: 'MARCH 15, 2026',  title: 'Applications Open',    desc: 'Early-stage registration opens for all qualified IGDTUW and external candidates.',  active: true  },
-  { date: 'APRIL 30, 2026',  title: 'Application Deadline', desc: 'Final window for submission of portfolios and project preferences.',                  active: true  },
-  { date: 'JUNE 01, 2026',   title: 'Program Onboarding',   desc: 'Orientation day, track allocation, and initial mentor meetings.',                    active: false },
+  { date: 'MAY 29, 2026',    title: 'Applications Open',    desc: 'Early-stage registration opens for all qualified IGDTUW and external candidates.',  active: true  },
+  { date: 'JUNE 05, 2026',   title: 'Application Deadline', desc: 'Final window for submission of portfolios and project preferences.',                  active: true  },
+  { date: 'JUNE 08, 2026',   title: 'Program Onboarding',   desc: 'Orientation day, track allocation, and initial mentor meetings.',                    active: false },
   { date: 'JULY 25, 2026',   title: 'Final Showcase',       desc: 'Project demonstrations to industry evaluators and award ceremony.',                  active: false },
 ]
 
@@ -86,12 +96,12 @@ function AnimatedWorkspace({ mousePos }) {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [terminalLines, setTerminalLines] = useState([])
   const terminalQueue = [
-    '$ npm run dev',
-    '▸ Ready on http://localhost:5173',
-    '$ git commit -m "feat: hero animation"',
-    '✓ [main 3a9f2c1] feat: hero animation',
-    '$ npm run build',
-    '✓ Build complete in 1.2s',
+    '$ npm run research',
+    '▸ Loading research datasets...',
+    '$ python analyze_data.py --optimize',
+    '✓ Analysis complete: 127 papers reviewed',
+    '$ git commit -m "feat: research insights"',
+    '✓ [main 8e2f4c9] research milestone achieved',
   ]
 
   useEffect(() => {
@@ -178,28 +188,25 @@ function AnimatedWorkspace({ mousePos }) {
           </div>
           <div className="ip-ws-base" />
           <div className="ip-ws-stand" />
-          <div className="ip-ws-keyboard">
-            {Array.from({ length: 30 }).map((_, i) => <span key={i} className="ip-ws-key" />)}
-          </div>
         </div>
       </div>
 
       <div className="ip-ws-float ip-ws-float-react" style={floatStyle('6%', '8%', 0.55, 0.25)}>
-        <svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="5" fill="#00c4e0"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2" transform="rotate(60 21 21)"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#00c4e0" strokeWidth="2" transform="rotate(-60 21 21)"/></svg>
+        <svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="5" fill="#5FAAD9"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#5FAAD9" strokeWidth="2"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#5FAAD9" strokeWidth="2" transform="rotate(60 21 21)"/><ellipse cx="21" cy="21" rx="18" ry="7" fill="none" stroke="#5FAAD9" strokeWidth="2" transform="rotate(-60 21 21)"/></svg>
       </div>
 
       <div className="ip-ws-float ip-ws-float-git" style={floatStyle('82%', '4%', 0.7, 0.2)}>
-        <svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 2 L30 10 L30 26 L18 34 L6 26 L6 10 Z" fill="none" stroke="#006d7a" strokeWidth="2"/><circle cx="18" cy="12" r="3" fill="#006d7a"/><circle cx="12" cy="22" r="3" fill="#006d7a"/><circle cx="24" cy="22" r="3" fill="#006d7a"/><line x1="18" y1="15" x2="12" y2="19" stroke="#006d7a" strokeWidth="1.5"/><line x1="18" y1="15" x2="24" y2="19" stroke="#006d7a" strokeWidth="1.5"/></svg>
+        <svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 2 L30 10 L30 26 L18 34 L6 26 L6 10 Z" fill="none" stroke="#2477BF" strokeWidth="2"/><circle cx="18" cy="12" r="3" fill="#2477BF"/><circle cx="12" cy="22" r="3" fill="#2477BF"/><circle cx="24" cy="22" r="3" fill="#2477BF"/><line x1="18" y1="15" x2="12" y2="19" stroke="#2477BF" strokeWidth="1.5"/><line x1="18" y1="15" x2="24" y2="19" stroke="#2477BF" strokeWidth="1.5"/></svg>
       </div>
 
       <div className="ip-ws-float ip-ws-float-trophy" style={floatStyle('88%', '62%', 0.6, 0.15)}>
         <div className="ip-ws-badge-chip">
-          <span>🏆</span><span>Hackathon</span>
+          <span>★</span><span>Excellence</span>
         </div>
       </div>
 
       <div className="ip-ws-float ip-ws-float-coffee" style={floatStyle('4%', '70%', 0.8, 0.3)}>
-        <svg width="38" height="38" viewBox="0 0 38 38"><rect x="6" y="14" width="20" height="18" rx="4" fill="#e8f4f8" stroke="#006d7a" strokeWidth="1.5"/><path d="M26 18 Q34 18 34 23 Q34 28 26 28" fill="none" stroke="#006d7a" strokeWidth="1.5"/><path d="M12 8 Q14 4 12 2" stroke="#00c4e0" strokeWidth="1.5" fill="none" strokeLinecap="round"/><path d="M17 8 Q19 4 17 2" stroke="#00c4e0" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
+        <svg width="38" height="38" viewBox="0 0 38 38"><rect x="6" y="14" width="20" height="18" rx="4" fill="rgba(82,102,192,0.15)" stroke="#5266C0" strokeWidth="1.5"/><path d="M26 18 Q34 18 34 23 Q34 28 26 28" fill="none" stroke="#5266C0" strokeWidth="1.5"/><path d="M12 8 Q14 4 12 2" stroke="#8FA3D9" strokeWidth="1.5" fill="none" strokeLinecap="round"/><path d="M17 8 Q19 4 17 2" stroke="#8FA3D9" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
       </div>
 
       <div className="ip-ws-float ip-ws-float-snippet1" style={floatStyle('78%', '30%', 0.65, 0.22)}>
@@ -223,22 +230,27 @@ function AnimatedWorkspace({ mousePos }) {
       </div>
 
       <div className="ip-ws-float ip-ws-float-node1" style={floatStyle('70%', '82%', 0.58, 0.2)}>
-        <svg width="44" height="28" viewBox="0 0 44 28"><circle cx="6" cy="14" r="5" fill="none" stroke="#00c4e0" strokeWidth="1.5"/><circle cx="22" cy="6" r="5" fill="none" stroke="#006d7a" strokeWidth="1.5"/><circle cx="38" cy="14" r="5" fill="none" stroke="#00c4e0" strokeWidth="1.5"/><circle cx="22" cy="22" r="5" fill="none" stroke="#005f7f" strokeWidth="1.5"/><line x1="11" y1="14" x2="17" y2="9" stroke="#006d7a" strokeWidth="1"/><line x1="27" y1="9" x2="33" y2="13" stroke="#006d7a" strokeWidth="1"/><line x1="11" y1="16" x2="17" y2="20" stroke="#006d7a" strokeWidth="1"/><line x1="27" y1="20" x2="33" y2="16" stroke="#006d7a" strokeWidth="1"/></svg>
+        <svg width="44" height="28" viewBox="0 0 44 28"><circle cx="6" cy="14" r="5" fill="none" stroke="#8FA3D9" strokeWidth="1.5"/><circle cx="22" cy="6" r="5" fill="none" stroke="#5266C0" strokeWidth="1.5"/><circle cx="38" cy="14" r="5" fill="none" stroke="#8FA3D9" strokeWidth="1.5"/><circle cx="22" cy="22" r="5" fill="none" stroke="#4750B8" strokeWidth="1.5"/><line x1="11" y1="14" x2="17" y2="9" stroke="#5266C0" strokeWidth="1"/><line x1="27" y1="9" x2="33" y2="13" stroke="#5266C0" strokeWidth="1"/><line x1="11" y1="16" x2="17" y2="20" stroke="#5266C0" strokeWidth="1"/><line x1="27" y1="20" x2="33" y2="16" stroke="#5266C0" strokeWidth="1"/></svg>
       </div>
 
       <div className="ip-ws-float ip-ws-float-sticky" style={floatStyle('8%', '18%', 0.62, 0.25)}>
         <div className="ip-ws-sticky">
-          <div>ship it 🚀</div>
-          <div>by friday!</div>
+          <div>AI/ML</div>
+          <div>Web3</div>
+          <div>Cloud</div>
         </div>
       </div>
 
-      <div className="ip-ws-float ip-ws-float-geo1" style={floatStyle('60%', '88%', 0.75, 0.12)}>
-        <svg width="28" height="28" viewBox="0 0 28 28"><polygon points="14,2 26,22 2,22" fill="none" stroke="#00c4e0" strokeWidth="2"/></svg>
+      <div className="ip-ws-float ip-ws-float-geo1" style={floatStyle('15%', '65%', 0.75, 0.12)}>
+        <div className="ip-ws-badge-chip">
+          <span>⚡</span><span>Research</span>
+        </div>
       </div>
 
-      <div className="ip-ws-float ip-ws-float-geo2" style={floatStyle('92%', '45%', 0.68, 0.1)}>
-        <svg width="22" height="22" viewBox="0 0 22 22"><rect x="3" y="3" width="16" height="16" rx="3" fill="none" stroke="#006d7a" strokeWidth="2" transform="rotate(15 11 11)"/></svg>
+      <div className="ip-ws-float ip-ws-float-geo2" style={floatStyle('88%', '75%', 0.68, 0.1)}>
+        <div className="ip-ws-badge-chip">
+          <span>◆</span><span>Innovation</span>
+        </div>
       </div>
     </div>
   )
@@ -287,6 +299,7 @@ export default function SummerInternship2026() {
     <div className="ip">
 
       <nav ref={navRef} className={`ip-nav${scrolled ? ' scrolled' : ''}`}>
+        <a href="/" className="ip-nav-back">← Back</a>
         <a href="#hero" className="ip-nav-brand">ACM IGDTUW</a>
         <div className="ip-nav-links">
           {NAV_LINKS.map(({ label, href }) => (
@@ -311,22 +324,14 @@ export default function SummerInternship2026() {
               <a href="#register" className="ip-btn ip-btn-primary">Begin Application →</a>
               <a href="#timeline" className="ip-btn ip-btn-ghost">View Curriculum</a>
             </div>
-            <div className="ip-hero-stats-row">
-              {[
-                { val: '500+', label: 'Alumni' },
-                { val: '24+',  label: 'Tracks' },
-                { val: '8w',   label: 'Program' },
-                { val: '100%', label: 'Cert Rate' },
-              ].map(({ val, label }) => (
-                <div key={label} data-h className="ip-hero-stat-pill">
-                  <span className="ip-hero-stat-pill-val">{val}</span>
-                  <span className="ip-hero-stat-pill-label">{label}</span>
-                </div>
-              ))}
+            <div className="ip-hero-stats-row" style={{ display: 'none' }}>
+              <p style={{ fontSize: '14px', color: '#4A4A4A', lineHeight: '1.8', marginTop: '20px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Learn industry-relevant skills in <strong>AI/ML, Web3, Cloud Infrastructure, and Cyber Security</strong>. Work on real-world projects mentored by renowned faculty and tech leaders. Join 500+ alumni.
+              </p>
             </div>
           </div>
           <div className="ip-hero-ws-col">
-            <AnimatedWorkspace mousePos={mousePos} />
+            <img src={collage} alt="Internship Collage" style={{ width: '100%', maxWidth: '500px', borderRadius: '16px' }} />
           </div>
         </div>
       </section>
@@ -345,15 +350,15 @@ export default function SummerInternship2026() {
             </div>
             <div className="ip-detail-grid">
               {[
-                { icon: '📅', label: 'Duration',   sub: '8 Weeks (June – Aug 2026)'   },
-                { icon: '📍', label: 'Mode',       sub: 'Hybrid (On-campus & Remote)' },
-                { icon: '💳', label: 'Fee',        sub: 'INR 3,500 (Early Bird)'      },
-                { icon: '🧠', label: 'Mentorship', sub: '1:1 Industry Connect'        },
-              ].map(({ icon, label, sub }) => (
+                { label: 'Duration',   sub: '8 Weeks (June – Aug 2026)'   },
+                { label: 'Mode',       sub: 'Hybrid (On-campus & Remote)' },
+                { label: 'Mentorship', sub: '1:1 Industry Connect'        },
+              ].map(({ label, sub }) => (
                 <div key={label} data-a className="ip-card ip-detail-card">
-                  <div className="ip-detail-icon">{icon}</div>
-                  <div className="ip-detail-label">{label}</div>
-                  <div className="ip-detail-sub">{sub}</div>
+                  <div>
+                    <div className="ip-detail-label">{label}</div>
+                    <div className="ip-detail-sub">{sub}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -383,11 +388,11 @@ export default function SummerInternship2026() {
           <h2 data-m className="ip-section-title ip-section-center">Academic Guidance</h2>
           <div className="ip-guidance-grid">
             {[
-              { name: 'Dr. Rishabh Kaushal', role: 'Faculty Advisor', desc: 'Assistant Professor, IT Department with specialisation in Web Mining & Cyber Security.' },
-              { name: 'Dr. Shweta Jindal',   role: 'Co-Advisor',      desc: 'Expert in Distributed Systems and Cloud Computing Architectures at IGDTUW.' },
-            ].map(({ name, role, desc }) => (
+              { name: 'Dr. Rishabh Kaushal', role: 'Faculty Advisor', desc: 'Assistant Professor, IT Department with specialisation in Web Mining & Cyber Security.', image: rishabhs },
+              { name: 'Dr. Shweta Jindal',   role: 'Co-Advisor',      desc: 'Expert in Distributed Systems and Cloud Computing Architectures at IGDTUW.', image: drshweta },
+            ].map(({ name, role, desc, image }) => (
               <div key={name} data-m className="ip-card ip-mentor-card">
-                <div style={{ height: '220px', background: 'linear-gradient(135deg,#b0c4ce,#8ea8b5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '56px', color: 'rgba(255,255,255,0.5)' }}>👤</div>
+                <img src={image} alt={name} className="ip-mentor-img" />
                 <div className="ip-mentor-body">
                   <div className="ip-mentor-name">{name}</div>
                   <div className="ip-mentor-role">{role}</div>
@@ -395,16 +400,7 @@ export default function SummerInternship2026() {
                 </div>
               </div>
             ))}
-            <div data-m className="ip-mentor-placeholder">
-              <div className="ip-mentor-ph-icon">👥</div>
-              <div className="ip-mentor-ph-title">Industry Mentor</div>
-              <div className="ip-mentor-ph-sub">Joining from Microsoft / Google / Amazon</div>
-            </div>
-            <div data-m className="ip-mentor-placeholder">
-              <div className="ip-mentor-ph-icon">🔬</div>
-              <div className="ip-mentor-ph-title">Research Lead</div>
-              <div className="ip-mentor-ph-sub">Joining from Premier R&D Labs</div>
-            </div>
+
           </div>
         </div>
       </section>
@@ -447,7 +443,7 @@ export default function SummerInternship2026() {
           </div>
           <div data-rc className="ip-rcell ip-rcell-pdf">
             <div className="ip-recap-pdf-embed-header">
-              <span className="ip-recap-pdf-icon">📄</span>
+              <span className="ip-recap-pdf-icon">⬇</span>
               <div>
                 <div className="ip-recap-pdf-title">2024–25 Program Magazine</div>
                 <div className="ip-recap-pdf-sub">Research highlights, projects & more</div>
@@ -486,7 +482,7 @@ export default function SummerInternship2026() {
             <div className="ip-qr-box">QR CODE</div>
             <div className="ip-qr-label">Scan to Pay via UPI</div>
             <div className="ip-qr-sub">All major wallets supported</div>
-            <a href="#" onClick={e => e.preventDefault()} className="ip-btn ip-btn-teal-solid" style={{ marginTop: '8px' }}>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform" target="_blank" rel="noopener noreferrer" className="ip-btn ip-btn-teal-solid" style={{ marginTop: '8px' }}>
               Open Form After Payment
             </a>
           </div>
@@ -508,7 +504,7 @@ export default function SummerInternship2026() {
             <div className="ip-footer-brand">ACM IGDTUW</div>
             <p className="ip-footer-mission">Building the next generation of women leaders in technology through community and mentorship.</p>
             <div className="ip-footer-social">
-              {['🌐', '@', '▣'].map((icon, i) => (
+              {['Web', 'Linked', 'Instagram'].map((icon, i) => (
                 <a key={i} href="#" className="ip-footer-social-btn">{icon}</a>
               ))}
             </div>
