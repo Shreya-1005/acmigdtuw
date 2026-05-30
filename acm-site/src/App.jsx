@@ -21,17 +21,17 @@ import GameOverlay       from './components/ui/GameOverlay'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState(() => {
+const [currentPage, setCurrentPage] = useState(() => {
     let path = window.location.pathname
-    
-    // Restore path from 404 redirect
-    if (sessionStorage.redirect) {
-      path = sessionStorage.redirect
+
+    const saved = sessionStorage.redirect
+    if (saved) {
       delete sessionStorage.redirect
-      window.history.replaceState(null, '', path)
+      window.history.replaceState(null, '', saved)
+      path = saved
     }
-    
-    return path.endsWith('summer-workshop-2026') || path.includes('summer-workshop-2026') ? 'internship' : 'home'
+
+    return path.includes('summer-workshop-2026') ? 'internship' : 'home'
   })
 
   useEffect(() => {
