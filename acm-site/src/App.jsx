@@ -30,13 +30,13 @@ export default function App() {
       delete sessionStorage.redirect
     }
     
-    return path.endsWith('internship-2026') || path.includes('internship-2026/') ? 'internship' : 'home'
+    return path.endsWith('summer-workshop-2026') || path.includes('summer-workshop-2026') ? 'internship' : 'home'
   })
 
   useEffect(() => {
     const handleRouting = () => {
       const path = window.location.pathname
-      const page = path.endsWith('internship-2026') || path.includes('internship-2026/') ? 'internship' : 'home'
+      const page = path.endsWith('summer-workshop-2026') || path.includes('summer-workshop-2026/') ? 'internship' : 'home'
       setCurrentPage(page)
     }
 
@@ -51,7 +51,7 @@ export default function App() {
       if (!link) return
       
       const href = link.getAttribute('href') || ''
-      if (href.includes('internship-2026')) {
+      if (href.includes('summer-workshop-2026')) {
         e.preventDefault()
         e.stopPropagation()
         
