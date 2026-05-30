@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 const NAV_LINKS = [
   { label: 'About',    href: '#about'    },
   { label: 'Events',   href: '#events'   },
+  { label: 'Internship 2026', href: '/acmigdtuw/internship-2026' },
   { label: 'Faculty',  href: '#faculty'  },
   { label: 'Team',     href: '#team'     },
   { label: 'Alumni',   href: '#alumni'   },

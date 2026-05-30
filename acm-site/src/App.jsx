@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Analytics } from "@vercel/analytics/react"
-
+import SummerInternship2026 from './pages/SummerInternship2026'
 import store             from './lib/store'
 import Navbar            from './components/Navbar'
 import Scene             from './components/3d/Scene'
@@ -21,8 +21,43 @@ import GameOverlay       from './components/ui/GameOverlay'
 gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState(() => {
+    const path = window.location.pathname
+    return path.endsWith('internship-2026') || path.includes('internship-2026/') ? 'internship' : 'home'
+  })
+
   useEffect(() => {
-    // Sync scroll progress → global store (read by R3F scene)
+    const handleRouting = () => {
+      const path = window.location.pathname
+      const page = path.endsWith('internship-2026') || path.includes('internship-2026/') ? 'internship' : 'home'
+      setCurrentPage(page)
+    }
+
+    window.addEventListener('popstate', handleRouting)
+    return () => window.removeEventListener('popstate', handleRouting)
+  }, [])
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (e.target.tagName !== 'A') return
+      const href = e.target.getAttribute('href') || ''
+      if (href.includes('internship-2026')) {
+        e.preventDefault()
+        window.history.pushState(null, '', href)
+        setCurrentPage('internship')
+      }
+    }
+    
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
+
+  if (currentPage === 'internship') {
+    return <SummerInternship2026 />
+  }
+  useEffect(() => {
+    if (currentPage !== 'home') return
+
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
       store.scroll.progress = max > 0 ? window.scrollY / max : 0
@@ -30,7 +65,6 @@ export default function App() {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
 
-    // Sync mouse → global store (parallax in R3F)
     const onMouse = (e) => {
       store.mouse.x = (e.clientX / window.innerWidth  - 0.5) * 2
       store.mouse.y = (e.clientY / window.innerHeight - 0.5) * -2
@@ -46,7 +80,7 @@ export default function App() {
       window.removeEventListener('resize',    onResize)
       ScrollTrigger.getAll().forEach(t => t.kill())
     }
-  }, [])
+  }, [currentPage])
 
   return (
     <div style={{ background: '#04080f', minHeight: '100vh', overflowX: 'hidden' }}>
