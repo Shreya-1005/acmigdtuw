@@ -39,17 +39,26 @@ export default function App() {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (e.target.tagName !== 'A') return
-      const href = e.target.getAttribute('href') || ''
+      // Find the closest anchor element (handles clicks on text inside the anchor)
+      const link = e.target.closest('a')
+      if (!link) return
+      
+      const href = link.getAttribute('href') || ''
       if (href.includes('internship-2026')) {
         e.preventDefault()
-        window.history.pushState(null, '', href)
+        e.stopPropagation()
+        
+        // Update state immediately before history push
         setCurrentPage('internship')
+        window.history.pushState(null, '', href)
+        
+        // Scroll to top when navigating
+        window.scrollTo(0, 0)
       }
     }
     
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
+    document.addEventListener('click', handleClick, true)
+    return () => document.removeEventListener('click', handleClick, true)
   }, [])
 
   if (currentPage === 'internship') {
