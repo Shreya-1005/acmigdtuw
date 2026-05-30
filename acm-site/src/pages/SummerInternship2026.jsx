@@ -437,7 +437,7 @@ export default function SummerInternship2026() {
           </div>
           <div data-rc className="ip-rcell ip-rcell-tracks">
             <div className="ip-rcell-tracks-title">Research Tracks</div>
-            {['AI / ML', 'LLMs', 'Blockchain', 'Cybersecurity', 'Healthcare AI', 'Cloud & Infra'].map(t => (
+            {['Machine Learning', 'Cybersecurity', 'Deep Learning', 'Cloud Computing', 'Healthcare Issues', 'Computer Vision', 'Image Segmentation and Optimization'].map(t => (
               <div key={t} className="ip-rcell-track-item"><div className="ip-rcell-track-dot" />{t}</div>
             ))}
           </div>
@@ -478,11 +478,8 @@ export default function SummerInternship2026() {
               </div>
             ))}
           </div>
-          <div className="ip-qr-panel">
-            <div className="ip-qr-box">QR CODE</div>
-            <div className="ip-qr-label">Scan to Pay via UPI</div>
-            <div className="ip-qr-sub">All major wallets supported</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform" target="_blank" rel="noopener noreferrer" className="ip-btn ip-btn-teal-solid" style={{ marginTop: '8px' }}>
+          <div className="ip-form-button-container">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform" target="_blank" rel="noopener noreferrer" className="ip-btn ip-btn-teal-solid ip-form-btn">
               Open Form After Payment
             </a>
           </div>
