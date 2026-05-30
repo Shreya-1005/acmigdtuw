@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { label: 'Home',     href: '#hero'     },
   { label: 'About Us', href: '#about'    },
   { label: 'Timeline', href: '#timeline' },
+  { label: 'Register', href: '#register' },  
   { label: 'Speakers', href: '#mentors'  },
   { label: 'Recap',    href: '#recap'    },
 ]
@@ -46,7 +47,7 @@ const FAQS = [
   { q: 'Is this internship paid?',              a: 'This is a learning-focused internship. Participants receive mentorship, certification, and project experience rather than a stipend.' },
   { q: 'What is the registration fee?',         a: '₹1,000 for IGDTUW students and ₹2,000 for students from other institutions.' },
   { q: 'Online or offline?',                    a: '100% online. All lectures are recorded and provided asynchronously for maximum flexibility.' },
-  { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form with your transaction receipt.' },
+  { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form ( https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform ) with your transaction receipt.' },
   { q: 'Where do I fill the registration form?', a: 'After completing the payment, open the registration form here: https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform' },
 ]
 
@@ -301,7 +302,6 @@ export default function SummerInternship2026() {
 
       <nav ref={navRef} className={`ip-nav${scrolled ? ' scrolled' : ''}`}>
         <a href="/acmigdtuw/" className="ip-nav-back">← Back</a>
-        <a href="#hero" className="ip-nav-brand">ACM IGDTUW</a>
         <div className="ip-nav-links">
           {NAV_LINKS.map(({ label, href }) => (
             <a key={label} href={href} className="ip-nav-link">{label}</a>
@@ -319,11 +319,10 @@ export default function SummerInternship2026() {
               <span>Journey This Summer.</span>
             </h1>
             <p data-h className="ip-hero-sub">
-              Join ACM IGDTUW's premier 8-week summer internship. Work on high-impact projects, receive 1:1 mentorship from industry leaders, and build the future.
+              ACM Summer Internship programme shall be research oriented. Training and internship shall provide the essential skills for developing critical thinking, problem-solving, and analytical skills. The goal will be to bridge the gap between classroom learning and real-world application, with research focus.
             </p>
             <div data-h className="ip-hero-btns">
               <a href="#register" className="ip-btn ip-btn-primary">Begin Application →</a>
-              <a href="#timeline" className="ip-btn ip-btn-ghost">View Curriculum</a>
             </div>
             <div className="ip-hero-stats-row" style={{ display: 'none' }}>
               <p style={{ fontSize: '14px', color: '#4A4A4A', lineHeight: '1.8', marginTop: '20px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
