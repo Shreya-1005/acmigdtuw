@@ -22,7 +22,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(() => {
-    const path = window.location.pathname
+    let path = window.location.pathname
+    
+    // Restore path from 404 redirect
+    if (sessionStorage.redirect) {
+      path = sessionStorage.redirect
+      delete sessionStorage.redirect
+    }
+    
     return path.endsWith('internship-2026') || path.includes('internship-2026/') ? 'internship' : 'home'
   })
 
