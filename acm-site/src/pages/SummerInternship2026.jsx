@@ -299,7 +299,7 @@ export default function SummerInternship2026() {
     <div className="ip">
 
       <nav ref={navRef} className={`ip-nav${scrolled ? ' scrolled' : ''}`}>
-        <a href="/" className="ip-nav-back">← Back</a>
+        <a href="/acmigdtuw/" className="ip-nav-back">← Back</a>
         <a href="#hero" className="ip-nav-brand">ACM IGDTUW</a>
         <div className="ip-nav-links">
           {NAV_LINKS.map(({ label, href }) => (

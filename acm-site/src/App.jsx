@@ -28,6 +28,7 @@ export default function App() {
     if (sessionStorage.redirect) {
       path = sessionStorage.redirect
       delete sessionStorage.redirect
+      window.history.replaceState(null, '', path)
     }
     
     return path.endsWith('summer-workshop-2026') || path.includes('summer-workshop-2026') ? 'internship' : 'home'
@@ -68,9 +69,6 @@ export default function App() {
     return () => document.removeEventListener('click', handleClick, true)
   }, [])
 
-  if (currentPage === 'internship') {
-    return <SummerInternship2026 />
-  }
   useEffect(() => {
     if (currentPage !== 'home') return
 
@@ -97,6 +95,10 @@ export default function App() {
       ScrollTrigger.getAll().forEach(t => t.kill())
     }
   }, [currentPage])
+
+  if (currentPage === 'internship') {
+    return <SummerInternship2026 />
+  }
 
   return (
     <div style={{ background: '#04080f', minHeight: '100vh', overflowX: 'hidden' }}>
