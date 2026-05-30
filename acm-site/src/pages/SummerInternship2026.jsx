@@ -319,7 +319,8 @@ export default function SummerInternship2026() {
               <span>Journey This Summer.</span>
             </h1>
             <p data-h className="ip-hero-sub">
-              ACM Summer programme is research oriented. Training and internship shall provide the essential skills for developing critical thinking, problem-solving, and analytical skills. The goal will be to bridge the gap between classroom learning and real-world application, with research focus.
+              ACM Summer programme is research oriented. Training and internship shall provide the essential skills for developing critical thinking, problem-solving, and analytical skills. 
+              The goal will be to bridge the gap between classroom learning and real-world application, with research focus.
             </p>
             <div data-h className="ip-hero-btns">
               <a href="#register" className="ip-btn ip-btn-primary">Begin Application →</a>
