@@ -7,8 +7,8 @@ import pic2 from '../assets/pic2.png'
 import pic3 from '../assets/pic3.png'
 import test1 from '../assets/test1.png'
 import test2 from '../assets/test2.png'
+import newsirpic from '../assets/newsirpic.jpeg'
 import drshweta from '../assets/drshweta.png'
-import rishabhs from '../assets/rishabhsir.png'
 import collage from '../assets/collage.png'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -47,6 +47,7 @@ const FAQS = [
   { q: 'What is the registration fee?',         a: '₹1,000 for IGDTUW students and ₹2,000 for students from other institutions.' },
   { q: 'Online or offline?',                    a: '100% online. All lectures are recorded and provided asynchronously for maximum flexibility.' },
   { q: 'How do I register?',                    a: 'Complete the payment via NEFT/UPI to the account details below, then fill in the registration form with your transaction receipt.' },
+  { q: 'Where do I fill the registration form?', a: 'After completing the payment, open the registration form here: https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform' },
 ]
 
 const RECAP_IMAGES = [
@@ -352,7 +353,7 @@ export default function SummerInternship2026() {
               {[
                 { label: 'Duration',   sub: '8 Weeks (June – Aug 2026)'   },
                 { label: 'Mode',       sub: 'Hybrid (On-campus & Remote)' },
-                { label: 'Mentorship', sub: '1:1 Industry Connect'        },
+                { label: 'Mentorship', sub: 'Research-Oriented'        },
               ].map(({ label, sub }) => (
                 <div key={label} data-a className="ip-card ip-detail-card">
                   <div>
@@ -383,19 +384,49 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
+      <section ref={payRef} id="register" className="ip-payment-section">
+        <div data-p className="ip-payment-card">
+          <div>
+            <h2 className="ip-payment-title">Payment & Registration</h2>
+            <p className="ip-payment-desc">Complete the registration fee payment via NEFT/UPI and attach the transaction receipt to the application form.</p>
+            {[
+              ['Account Name:',   'ACM IGDTUW'],
+              ['Account Number:', '09001000018964'],
+              ['IFSC Code:',      'PSIB0001098'],
+              ['Bank:',           'Punjab and Sind Bank, GGSIPU University, Delhi – 110006'],
+            ].map(([label, val]) => (
+              <div key={label} className="ip-payment-row">
+                <span className="ip-payment-label">{label}</span>
+                <span className="ip-payment-val">{val}</span>
+              </div>
+            ))}
+          </div>
+          <div className="ip-form-button-container">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform" target="_blank" rel="noopener noreferrer" className="ip-btn ip-btn-teal-solid ip-form-btn">
+              Registeration Form
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section ref={mentorsRef} id="mentors" className="ip-section ip-section-alt">
         <div className="ip-max">
           <h2 data-m className="ip-section-title ip-section-center">Academic Guidance</h2>
           <div className="ip-guidance-grid">
             {[
-              { name: 'Dr. Rishabh Kaushal', role: 'Faculty Advisor', desc: 'Assistant Professor, IT Department with specialisation in Web Mining & Cyber Security.', image: rishabhs },
-              { name: 'Dr. Shweta Jindal',   role: 'Co-Advisor',      desc: 'Expert in Distributed Systems and Cloud Computing Architectures at IGDTUW.', image: drshweta },
-            ].map(({ name, role, desc, image }) => (
+              { name: 'Dr. Rishabh Kaushal', role: 'Faculty Advisor', desc: 'Assistant Professor, IT Department with specialisation in Web Mining & Cyber Security.', image: newsirpic, links: [{ url: 'https://rishabhkaushal.github.io/', label: 'PORTFOLIO' }, { url: 'https://www.igdtuw.ac.in/profile/details/dr-rishabh-kaushal', label: 'IGDTUW' }] },
+              { name: 'Dr. Shweta Jindal',   role: 'Faculty Advisor', desc: 'Expert in Distributed Systems and Cloud Computing Architectures at IGDTUW.', image: drshweta, links: [{ url: 'https://www.igdtuw.ac.in/profile/details/dr-shweta-jindal-formerly-shweta-singhal', label: 'IGDTUW' }] },
+            ].map(({ name, role, desc, image, links }) => (
               <div key={name} data-m className="ip-card ip-mentor-card">
                 <img src={image} alt={name} className="ip-mentor-img" />
                 <div className="ip-mentor-body">
                   <div className="ip-mentor-name">{name}</div>
                   <div className="ip-mentor-role">{role}</div>
+                  <div style={{ display: 'flex', gap: '16px', marginBottom: '12px', justifyContent: 'center', fontSize: '13px' }}>
+                    {links.map((link, idx) => (
+                      <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" style={{ color: '#5B5FFF', textDecoration: 'underline' }}>{link.label}</a>
+                    ))}
+                  </div>
                   <div className="ip-mentor-desc">{desc}</div>
                 </div>
               </div>
@@ -461,31 +492,6 @@ export default function SummerInternship2026() {
         </div>
       </section>
 
-      <section ref={payRef} id="register" className="ip-payment-section">
-        <div data-p className="ip-payment-card">
-          <div>
-            <h2 className="ip-payment-title">Payment & Registration</h2>
-            <p className="ip-payment-desc">Complete the registration fee payment via NEFT/UPI and attach the transaction receipt to the application form.</p>
-            {[
-              ['Account Name:',   'ACM IGDTUW Student Chapter'],
-              ['Account Number:', '09001000018964'],
-              ['IFSC Code:',      'PSIB0001098'],
-              ['Bank:',           'Punjab and Sind Bank, GGSIPU University, Delhi – 110006'],
-            ].map(([label, val]) => (
-              <div key={label} className="ip-payment-row">
-                <span className="ip-payment-label">{label}</span>
-                <span className="ip-payment-val">{val}</span>
-              </div>
-            ))}
-          </div>
-          <div className="ip-form-button-container">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdKeMQlrWgNxnArM_pDyKvMt0fe4RMHnxZSKufBefZ2YYWn4w/viewform" target="_blank" rel="noopener noreferrer" className="ip-btn ip-btn-teal-solid ip-form-btn">
-              Open Form After Payment
-            </a>
-          </div>
-        </div>
-      </section>
-
       <section ref={faqRef} className="ip-section ip-section-alt">
         <div className="ip-max-sm">
           <h2 data-f className="ip-section-title ip-section-center">Frequently Asked Questions</h2>
@@ -526,18 +532,35 @@ export default function SummerInternship2026() {
       </footer>
 
     </div>
-  )
+        )
 }
 
 function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false)
+  
+  // Parse URLs in the answer text
+  const renderAnswer = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g
+    const parts = text.split(urlRegex)
+    
+    return parts.map((part, i) => 
+      urlRegex.test(part) ? (
+        <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#5B5FFF', textDecoration: 'underline', cursor: 'pointer', wordBreak: 'break-all' }}>
+          {part}
+        </a>
+      ) : (
+        part
+      )
+    )
+  }
+  
   return (
     <div className={`ip-faq-item${open ? ' open' : ''}`} onClick={() => setOpen(o => !o)}>
       <div className="ip-faq-header">
         <span className="ip-faq-q">{q}</span>
         <span className={`ip-faq-chevron${open ? ' open' : ''}`}>▼</span>
       </div>
-      {open && <div className="ip-faq-a">{a}</div>}
+      {open && <div className="ip-faq-a">{renderAnswer(a)}</div>}
     </div>
   )
 }
