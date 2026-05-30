@@ -707,6 +707,15 @@
 .ip-payment-row:last-of-type { border-bottom: none; }
 .ip-payment-label { font-size: 13px; color: #4A4A4A; }
 .ip-payment-val { font-size: 14px; font-weight: 700; color: #2477BF; text-align: right; word-break: break-word; max-width: 300px; line-height: 1.5; }
+.ip-form-button-container { 
+  width: 100%; background: rgba(36,119,191,0.08); border-radius: 16px; 
+  padding: 32px 24px; margin-top: 24px; display: flex; align-items: center; 
+  justify-content: center; border: 2px solid rgba(36,119,191,0.2);
+}
+.ip-form-btn { 
+  width: 100%; min-height: 56px; display: flex; align-items: center; 
+  justify-content: center; border-radius: 12px; padding: 18px 32px !important;
+}
 .ip-qr-panel { background: rgba(36,119,191,0.05); border-radius: 16px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; border: 1px solid rgba(36,119,191,0.15); }
 .ip-qr-box { width: 140px; height: 140px; border-radius: 12px; background: rgba(36,119,191,0.08); display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: var(--f-m); color: #2477BF; letter-spacing: 0.08em; }
 .ip-qr-label { font-size: 14px; font-weight: 600; color: #1A1A1A; }
