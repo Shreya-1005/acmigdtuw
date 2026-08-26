@@ -18,7 +18,7 @@ const events = [
   {
     tag: 'Flagship Program',
     tagColor: '#00c4e0',
-    date: '8 Jun – 31 Jul 2026',
+    date: 'Jun – Jul 2026',
     title: 'ACM Research Summer Internship',
     desc: 'A flagship summer research internship designed to help students explore meaningful technical problems through guided, hands-on work.',
     objective: 'Connected students with research-oriented learning, mentorship, and practical project experience during the summer break.',
@@ -30,7 +30,7 @@ const events = [
   {
     tag: 'Challenge',
     tagColor: '#0082aa',
-    date: '22 Mar – 25 Apr 2026',
+    date: 'Mar – Apr 2026',
     title: 'POTD: 30-Day LeetCode Challenge',
     desc: 'A consistency-first coding challenge where students solved one LeetCode problem each day for 30 days.',
     objective: 'Built a sustainable daily problem-solving habit through regular practice and steady progress, with consistency as the only requirement.',
@@ -40,7 +40,7 @@ const events = [
   {
     tag: 'Open Source',
     tagColor: '#005f7f',
-    date: '3 – 10 Apr 2026',
+    date: 'Apr 2026',
     title: 'Sourcery',
     desc: 'A contribution sprint where students worked on real-world projects under the guidance of project maintainers.',
     objective: 'Gave students practical experience solving meaningful problems, collaborating with maintainers, and contributing beyond tutorials and toy exercises.',
