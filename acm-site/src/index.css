@@ -106,6 +106,25 @@ body {
   -webkit-backdrop-filter: blur(14px);
 }
 
+.event-modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #00c4e0 transparent;
+}
+
+.event-modal-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.event-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.event-modal-content::-webkit-scrollbar-thumb {
+  background: #00c4e0;
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(0, 196, 224, 0.65);
+}
+
 /* Prevent tap highlight on mobile */
 a, button { -webkit-tap-highlight-color: transparent; }
 
