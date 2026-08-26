@@ -2,10 +2,51 @@
 import { createPortal } from 'react-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import potdImage from '../../assets/potd.jpeg'
+import recap1Image from '../../assets/recap1.jpg'
+import recap4Image from '../../assets/recap4.jpg'
+import sourceryImage from '../../assets/sourcery.jpeg'
+import summerInternshipImage from '../../assets/summer-intern-26-poster.jpeg'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const getEventImageSrc = (image) => image.startsWith('http') || image.startsWith('/')
+  ? image
+  : `${import.meta.env.BASE_URL}${image}`
+
 const events = [
+  {
+    tag: 'Flagship Program',
+    tagColor: '#00c4e0',
+    date: '8 Jun – 31 Jul 2026',
+    title: 'ACM Research Summer Internship',
+    desc: 'A flagship summer research internship designed to help students explore meaningful technical problems through guided, hands-on work.',
+    objective: 'Connected students with research-oriented learning, mentorship, and practical project experience during the summer break.',
+    participants: '70+',
+    images: [summerInternshipImage],
+    link: '/acmigdtuw/summer-workshop-2026',
+    linkLabel: 'Explore Internship'
+  },
+  {
+    tag: 'Challenge',
+    tagColor: '#0082aa',
+    date: '22 Mar – 25 Apr 2026',
+    title: 'POTD: 30-Day LeetCode Challenge',
+    desc: 'A consistency-first coding challenge where students solved one LeetCode problem each day for 30 days.',
+    objective: 'Built a sustainable daily problem-solving habit through regular practice and steady progress, with consistency as the only requirement.',
+    participants: '40+',
+    images: [potdImage]
+  },
+  {
+    tag: 'Open Source',
+    tagColor: '#005f7f',
+    date: '3 – 10 Apr 2026',
+    title: 'Sourcery',
+    desc: 'A contribution sprint where students worked on real-world projects under the guidance of project maintainers.',
+    objective: 'Gave students practical experience solving meaningful problems, collaborating with maintainers, and contributing beyond tutorials and toy exercises.',
+    participants: '25+',
+    images: [sourceryImage]
+  },
   {
     tag: 'Workshop',
     tagColor: '#00c4e0',
@@ -116,7 +157,7 @@ const events = [
     desc: 'Final evaluation and recognition of research internship projects with awards and certifications.',
     objective: 'Showcased research outcomes and recognized student achievements.',
     participants: '30+',
-    images: []  
+    images: [recap1Image, recap4Image]
   },
   // {
   //   tag: 'Workshop',
@@ -328,6 +369,22 @@ export default function EventsSection() {
                 </div>
                 <h3 style={{ color: '#fff' }}>{ev.title}</h3>
                 <p style={{ color: 'rgba(255,255,255,0.5)' }}>{ev.desc}</p>
+                {ev.link && (
+                  <a
+                    href={ev.link}
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      display: 'inline-flex',
+                      marginTop: '18px',
+                      color: '#00c4e0',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      textDecoration: 'none'
+                    }}
+                  >
+                    {ev.linkLabel} →
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -414,13 +471,32 @@ export default function EventsSection() {
                 </svg>
                 {selectedEvent.participants} attendees
               </p>
+              {selectedEvent.link && (
+                <a
+                  href={selectedEvent.link}
+                  style={{
+                    display: 'inline-flex',
+                    alignSelf: 'flex-start',
+                    marginTop: '28px',
+                    padding: '11px 18px',
+                    border: '1px solid rgba(0,196,224,0.5)',
+                    borderRadius: '999px',
+                    color: '#00c4e0',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    textDecoration: 'none'
+                  }}
+                >
+                  {selectedEvent.linkLabel} →
+                </a>
+              )}
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', justifyContent: 'center' }}>
               {selectedEvent.images.map((img, i) => (
                 <img
                   key={i}
-                  src={`${import.meta.env.BASE_URL}${img}`}
+                  src={getEventImageSrc(img)}
                   alt={`${selectedEvent.title} event photograph ${i + 1}`}
                   style={{
                     width: '100%',
